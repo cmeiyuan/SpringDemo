@@ -1,6 +1,16 @@
 package com.cmy.springdemo.dataobject;
 
+import org.hibernate.annotations.DynamicUpdate;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
+@DynamicUpdate
 public class User {
+    @Id
+    @GeneratedValue
     private Integer id;
     private String phone;
     private String nickName;
