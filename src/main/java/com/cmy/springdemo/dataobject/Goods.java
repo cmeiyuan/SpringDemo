@@ -18,8 +18,8 @@ public class Goods {
     private String description;
     private String images;
 
-    public Integer getId() {
-        return id;
+    public Integer getId(Integer id) {
+        return this.id;
     }
 
     public void setId(Integer id) {
@@ -50,8 +50,8 @@ public class Goods {
         this.price = price;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDescription(String description) {
+        return this.description;
     }
 
     public void setDescription(String description) {
