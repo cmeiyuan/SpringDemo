@@ -1,6 +1,6 @@
 package com.cmy.springdemo.controller;
 
-import com.cmy.springdemo.dataobject.Order;
+import com.cmy.springdemo.dataobject.GoodsOrder;
 import com.cmy.springdemo.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -21,12 +22,12 @@ public class OrderController {
     private OrderService orderService;
 
     @PostMapping("/add")
-    public Order add(@RequestParam("userId") Integer userId,
-                     @RequestParam("goodsId") Integer goodsId,
-                     @RequestParam("name") String name,
-                     @RequestParam("phone") String phone,
-                     @RequestParam("details") String details){
-        Order order = new Order();
+    public GoodsOrder add(@RequestParam("userId") Integer userId,
+                          @RequestParam("goodsId") Integer goodsId,
+                          @RequestParam("name") String name,
+                          @RequestParam("phone") String phone,
+                          @RequestParam("details") String details){
+        GoodsOrder order = new GoodsOrder();
         order.setUserId(userId);
         order.setGoodsId(goodsId);
         order.setName(name);
@@ -42,12 +43,16 @@ public class OrderController {
     }
 
     @PostMapping("/update")
-    public Order update(@RequestParam("id") Integer id,
-                        @RequestParam("name") String name,
-                        @RequestParam("phone") String phone,
-                        @RequestParam("details") String details){
-        Order order = new Order();
+    public GoodsOrder update(@RequestParam("id") Integer id,
+                             @RequestParam("userId") Integer userId,
+                             @RequestParam("goodsId") Integer goodsId,
+                             @RequestParam("name") String name,
+                             @RequestParam("phone") String phone,
+                             @RequestParam("details") String details){
+        GoodsOrder order = new GoodsOrder();
         order.setId(id);
+        order.setUserId(userId);
+        order.setGoodsId(goodsId);
         order.setName(name);
         order.setPhone(phone);
         order.setDetails(details);
@@ -55,10 +60,13 @@ public class OrderController {
     }
 
     @PostMapping("/list")
-    public List<Order> query(@RequestParam("userId") Integer userId,
-                             @RequestParam("page") int page,
-                             @RequestParam("size") int size){
-       return (List<Order>) orderService.queryOrderByUserId(userId);
+    public List<GoodsOrder> query(@RequestParam("userId") Integer userId,
+                                  @RequestParam("page") Integer page,
+                                  @RequestParam("size") Integer size){
+       Pageable pageable = new PageRequest(page,size);
+       Page<GoodsOrder> goodsOrdersPage = orderService.findAllByUserId(userId,pageable);
+       return goodsOrdersPage.getContent();
+       }
     }
 
-}
+

@@ -1,17 +1,17 @@
 package com.cmy.springdemo.service;
 
-import com.cmy.springdemo.dataobject.Order;
+import com.cmy.springdemo.dataobject.GoodsOrder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface OrderService {
 
-   Order save(Order order);
+   GoodsOrder save(GoodsOrder order);
 
    void delete(Integer id);
 
-   Page<Order> findAll(Pageable pageable);
+   Page<GoodsOrder> findAll(Pageable pageable);
 
-   Order queryOrderByUserId(Integer userId);
+   Page<GoodsOrder> findAllByUserId(Integer userId, Pageable pageable);
 
 }

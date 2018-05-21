@@ -1,6 +1,6 @@
 package com.cmy.springdemo.service.impl;
 
-import com.cmy.springdemo.dataobject.Order;
+import com.cmy.springdemo.dataobject.GoodsOrder;
 import com.cmy.springdemo.repository.OrderRepository;
 import com.cmy.springdemo.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +17,10 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
-    HashMap<Order,Integer> map = new HashMap<>();
+    HashMap<GoodsOrder,Integer> map = new HashMap<>();
 
     @Override
-    public Order save(Order order) {
+    public GoodsOrder save(GoodsOrder order) {
         return orderRepository.save(order);
     }
 
@@ -30,19 +30,21 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Page<Order> findAll(Pageable pageable) {
-        return orderRepository.findAll(pageable);
-    }
-
-    @Override
-    public Order queryOrderByUserId(Integer userId) {
-        Set<Order> set = map.keySet();
-        for(Order key : set){
+    public Page<GoodsOrder> findAllByUserId(Integer userId, Pageable pageable) {
+        Set<GoodsOrder> set = map.keySet();
+        for (GoodsOrder key : set) {
             Integer userId1 = map.get(key);
-            if (userId1 == userId){
-                return key;
+            if (userId1 == userId) {
+                return (Page<GoodsOrder>) key;
             }
         }
         return null;
     }
+
+    @Override
+    public Page<GoodsOrder> findAll(Pageable pageable) {
+        return orderRepository.findAll(pageable);
+    }
+
 }
+

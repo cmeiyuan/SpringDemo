@@ -7,7 +7,7 @@ import javax.persistence.Id;
 
 @Entity
 @DynamicUpdate
-public class Order {
+public class GoodsOrder {
     @Id
     @GeneratedValue
     private Integer id;
