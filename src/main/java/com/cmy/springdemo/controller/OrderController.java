@@ -63,8 +63,14 @@ public class OrderController {
     public List<GoodsOrder> query(@RequestParam("userId") Integer userId,
                                   @RequestParam("page") Integer page,
                                   @RequestParam("size") Integer size){
+
+        System.out.println("userId:" + userId);
+        System.out.println("page:" + page);
+        System.out.println("size:" + size);
+
        Pageable pageable = new PageRequest(page,size);
        Page<GoodsOrder> goodsOrdersPage = orderService.findAllByUserId(userId,pageable);
+
        return goodsOrdersPage.getContent();
        }
     }

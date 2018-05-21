@@ -31,14 +31,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Page<GoodsOrder> findAllByUserId(Integer userId, Pageable pageable) {
-        Set<GoodsOrder> set = map.keySet();
-        for (GoodsOrder key : set) {
-            Integer userId1 = map.get(key);
-            if (userId1 == userId) {
-                return (Page<GoodsOrder>) key;
-            }
-        }
-        return null;
+        return orderRepository.findAllByUserId(userId, pageable);
     }
 
     @Override
