@@ -11,5 +11,10 @@ spring:
       enabled: true
       charset: UTF-8
       force: true
+  freemarker:
+    charset: UTF-8
+    template-loader-path: classpath:/templates/
+    check-template-location: true
+    suffix: .ftl
 server:
   port: 8888

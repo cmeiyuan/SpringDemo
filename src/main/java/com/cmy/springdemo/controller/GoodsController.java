@@ -33,8 +33,8 @@ public class GoodsController {
         return goodsService.save(goods);
     }
     @GetMapping("/list")
-    public List<Goods> query(@RequestParam("page") int page,
-                             @RequestParam("size") int size){
+    public List<Goods> query(@RequestParam(value = "page", defaultValue = "0") int page,
+                             @RequestParam(value = "size", defaultValue = "10") int size){
         Pageable pageable = new PageRequest(page, size);
         Page<Goods> goodsPage = goodsService.findAll(pageable);
         return goodsPage.getContent();

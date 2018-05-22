@@ -18,7 +18,7 @@ public class Goods {
     private String description;
     private String images;
 
-    public Integer getId(Integer id) {
+    public Integer getId() {
         return this.id;
     }
 
@@ -50,7 +50,7 @@ public class Goods {
         this.price = price;
     }
 
-    public String getDescription(String description) {
+    public String getDescription() {
         return this.description;
     }
 
